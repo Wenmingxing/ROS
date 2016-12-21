@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+
+import roslib
+roslib.load_manifest("beginner_tutorials")
+
+import rospy
+
+from beginner_tutorials.msg import Num,carodom
+from geometry_msgs.msg import Twist
+
+import serial_listenning as com_ctr
+import glob
+from math import sqrt,atan2,pow
+
+class bluetooth_cmd():
+	def __init__(self):
+		rospy.init_node("robot_driver",anonymous=True)
+	def callback(self,msg):
+		cmd_twist_rotation = msg.angular.z
+		cmd_twist_x = msg.linear.x*10.0
+		cmd_twist_y = msg.linear.y*10.0
+		
+		wheelspeed = self.odom_to_speed(cmd_twist_x,cmd_twist_y,cmd_twist_rotation)
+		print "msg:",msg
+		print wheelspeed
+		
+		self.blue_tooth_send([wheelspeed[0],self.speed_kp,self.speed.ki,wheelspeed[1]])
+	
+	def odom_to_speed(self,cmd_twist_x =0,)
