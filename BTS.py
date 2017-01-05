@@ -1,0 +1,64 @@
+#! /usr/bin/env python
+
+# Construct/initializa the nodes in binary tree
+class TreeNode(object):
+	def __init__(self,data=None,left=None,right=None):
+		self.data = data
+		self.left =left
+		self.right = right
+	
+
+
+
+	
+# Construct the binary tree
+
+class BTree(object):
+	def __init__(self,root):
+		self.root = root
+	
+	def is_empty(self):
+		if self.root == None:
+			return True
+		else:
+			return False
+	#preorder
+	def preOrder(self,treenode):
+		if treenode is None:
+			return
+		print(treenode.data)
+		self.preOrder(treenode.left)
+		self.preOrder(treenode.right)
+	
+	#levelorder
+	def inOrder(self,treenode):
+		if treenode is None:
+			return
+		self.inOrder(treenode.left)
+		print(treenode.data)
+		self.inOrder(treenode.right)
+	
+	def postOrder(self,treenode):
+		if treenode is None:
+			return
+		self.postOrder(treenode.left)
+		self.postOrder(treenode.right)
+		print(treenode.data)
+	
+
+n9 = TreeNode(9)
+n8 = TreeNode(8)
+n4 = TreeNode(4,n8,n9)
+n2 = TreeNode(2,n4,TreeNode(5))
+n3 = TreeNode(3,TreeNode(6),TreeNode(7))
+n1 = TreeNode(1,n2,n3)
+
+#BTree(n1)
+
+bts = BTree(n1)
+bts.preOrder(bts.root)
+print(' ')
+bts.preOrder(n2)
+
+		
+	
